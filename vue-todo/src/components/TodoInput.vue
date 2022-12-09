@@ -10,8 +10,7 @@
 			default content
 			-->
 			<h3 slot="header">경고! <i class="closeModalBtn fas fa-times" @click="showModal = false"></i></h3>
-			<h3 slot="body">무언가를 입력하세용.</h3>
-			<h3 slot="footer">copy right</h3>
+			<h3 slot="body">아무것도 입력하지 않았습니다.</h3>
 		</AlertModal>
 	</div>
 </template>
@@ -20,14 +19,14 @@
 import AlertModal from './common/AlertModal.vue'
 
 export default {
-	data:function(){
+	data(){
 		return {
 			newTodoItem:'',
 			showModal:false, 
 		}
 	},
 	methods:{
-		addTodo:function(){
+		addTodo(){
 			// console.log(this.newTodoItem);
 
 			if (this.newTodoItem !== ''){ 	// newTodoItem에 값이 있을 때
@@ -37,7 +36,7 @@ export default {
 				this.showModal = !this.showModal 
 			}
 		},
-		clearInput: function(){
+		clearInput(){
 			this.newTodoItem = ''; 
 		},
 	},

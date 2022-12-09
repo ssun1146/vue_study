@@ -1,15 +1,15 @@
 <!-- eslint-disable vue/valid-template-root -->
 <template> 
 	<div class="list">
-		<ul>
-			<li v-for="(a, i) in propsdata" :key="i" class="shadow">
+		<transition-group name="list" tag="ul">
+			<li v-for="(a, i) in propsdata" :key="a" class="shadow">
 				<span class="checkBtn" @click="toggleComplete(a)">
 					<i class="fas fa-check" :class="{checkBtnCompleted: a.completed}"></i>
 				</span>
 				<span :class="{textCompleted: a.completed}">{{ a.items }}</span>
 				<span @click="removeTodo(a, i)" class="removeBtn"><i class="fas fa-trash-alt"></i></span>
 			</li>
-		</ul>
+		</transition-group>
 	</div>
 </template>
 
@@ -20,11 +20,11 @@ export default {
 		return {}
 	},
 	methods:{
-		removeTodo: function(a, i){
+		removeTodo(a, i){
 			this.$emit('removeItem', a, i);
 			// this.clearInput();
 		},
-		toggleComplete:function(a, i){
+		toggleComplete(a, i){
 			this.$emit('toggleItem', a, i);
 		},
 	},
@@ -39,4 +39,8 @@ li{display:flex; min-height:50px; line-height:50px; height:50px; margin:.5rem 0;
 .checkBtn{line-height:45px; color:#62acde; margin-right:5px; }
 .checkBtnCompleted{color:#b3adad; }
 .textCompleted{text-decoration:line-through; color:#b3adad; }
+
+/* .list-item{display:inline-block; margin-right:10px; } */
+.list-enter-active, .list-leave-active{transition:all 1s; }
+.list-enter, .list-leave-to{opacity:0; transform:translateY(30px); }
 </style>
