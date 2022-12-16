@@ -5,10 +5,6 @@
 		<!-- <button v-on:click="addTodo">add</button> -->
 		<span class="addContainer" v-on:click="addTodo"><i class="fas fa-plus addBtn"></i></span>
 		<AlertModal v-if="showModal" @close="showModal = false">
-			<!--
-			you can use custom content here to overwrite
-			default content
-			-->
 			<h3 slot="header">경고! <i class="closeModalBtn fas fa-times" @click="showModal = false"></i></h3>
 			<h3 slot="body">아무것도 입력하지 않았습니다.</h3>
 		</AlertModal>
@@ -28,9 +24,10 @@ export default {
 	methods:{
 		addTodo(){
 			// console.log(this.newTodoItem);
-
 			if (this.newTodoItem !== ''){ 	// newTodoItem에 값이 있을 때
-				this.$emit('addTodoItem',this.newTodoItem); 
+				// this.$emit('addTodoItem',this.newTodoItem); 
+				const text = this.newTodoItem.trim();
+				this.$store.commit('addOneItem', text);
 				this.clearInput();		 // input 값은 비워줌.
 			} else {
 				this.showModal = !this.showModal 
